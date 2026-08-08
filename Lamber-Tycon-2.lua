@@ -30,6 +30,13 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 						playerPos.CFrame = log.CFrame
 						treeChoping = true
 
+						local connection
+						connection = treeChoped.OnClientEvent:Connect(function(instruction)
+							if instruction == "FellTree" then
+								treeChoping = false
+							end
+						end)
+
 						while treeChoping do 
 							--Ивент для рубки дерерва
 							Event:FireServer(
@@ -44,19 +51,13 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 									cooldown = 0.65,
 									cuttingClass = "Axe"
 								})
-							wait(0.5)
-
-							treeChoped.OnClientEvent:Connect(function(...)
-
-								if not isListening then 
-									return -- Игнорируем вызов, если условие isListening == false
-								end
-
-								treeChoping = false
-							end)
+							wait(0.08)
 						end
 
+						if connection then connection:Disconnect() end -- Отключаем слушатель после завершения рубки
+
 						-- Дерево зрублено
+						wait(1)
 						treesCounter = treesCounter + 1
 						print("точка 1")
 						for index, fallTree in pairs(workspace.LogModels:GetChildren()) do -- Пошук зрубленого дерерва
