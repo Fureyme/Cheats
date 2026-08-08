@@ -14,7 +14,7 @@ local fallTree
 local allSwitch = false
 local treeType = "Birch"
 local treeFallType = "Loose_Birch"
-local treeAmount = 2
+local treeAmount = 3
 
 for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук регіонів з деревами
 	if region.Name == "TreeRegion" and region.ClassName == "Model" then
@@ -32,16 +32,19 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 
 						local connection
 						connection = workspace.LogModels.ChildAdded:Connect(function(child)
-							if child:WaitForChild("Owner" 10) and child.Name == treeFallType and child.Owner.OwnerString.Value == game:GetService("Players").LocalPlayer.Name then
+							if child.Name == treeFallType then
 								fallTree = child
-								treeChoping = false
-							elseif child.Name == treeFallType then
-								fallTree = child
-								treeChoping = false
 							end
 						end)
 
 						treeChoping = true
+						local connectionChoped
+						connectionChoped = treeChoped.OnClientEvent:Connect(function(instruction)
+							if instruction == "FellTree" then
+								treeChoping = false
+							end
+						end)
+
 						while treeChoping do 
 							--Ивент для рубки дерерва
 							Event:FireServer(
@@ -58,6 +61,8 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 								})
 							wait(0.08)
 						end
+
+						if connectionChoped then connectionChoped:Disconnect() end -- Отключаем слушатель после завершения рубки
 
 						connection:Disconnect() -- Відключаємо відстеження
 
