@@ -34,17 +34,11 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 						connection = workspace.LogModels.ChildAdded:Connect(function(child)
 							if child.Name == treeFallType then
 								fallTree = child
-							end
-						end)
-
-						treeChoping = true
-						local connectionChoped
-						connectionChoped = treeChoped.OnClientEvent:Connect(function(instruction)
-							if instruction == "FellTree" then
 								treeChoping = false
 							end
 						end)
 
+						treeChoping = true
 						while treeChoping do 
 							--Ивент для рубки дерерва
 							Event:FireServer(
@@ -61,8 +55,6 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 								})
 							wait(0.08)
 						end
-
-						if connectionChoped then connectionChoped:Disconnect() end -- Отключаем слушатель после завершения рубки
 
 						connection:Disconnect() -- Відключаємо відстеження
 
