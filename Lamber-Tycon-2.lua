@@ -1,3 +1,4 @@
+--loadstring(game:HttpGet("https://raw.githubusercontent.com/Fureyme/Cheats/refs/heads/main/Lamber-Tycon-2.lua"))()
 local localPlayer = game:GetService("Players").LocalPlayer
 local playerPos = localPlayer.Character.HumanoidRootPart
 local Event = game:GetService("ReplicatedStorage").Interaction.RemoteProxy
@@ -17,7 +18,7 @@ local treeAmount = 1
 for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук регіонів з деревами
 	if region.Name == "TreeRegion" and region.ClassName == "Model" then
 		for indexTree, tree in pairs(workspace:GetChildren()[indexRegion]:GetChildren()) do --Пошук типа дерева
-			if tree.TreeClass.Value == treeType then 
+			if tree:FindFirstChild("TreeClass").Value == treeType then 
 				for indexLog, log in pairs(workspace:GetChildren()[indexRegion]:GetChildren()[indexTree]:GetChildren()) do
 					if log.Name == "WoodSection" and log.ID.Value == 1 then
 
