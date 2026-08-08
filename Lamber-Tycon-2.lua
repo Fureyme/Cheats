@@ -55,11 +55,13 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 								treeChoping = false
 							end)
 						end
+
 						-- Дерево зрублено
 						treesCounter = treesCounter + 1
-
+						print("точка 1")
 						for index, fallTree in pairs(workspace.LogModels:GetChildren()) do -- Пошук зрубленого дерерва
 							if fallTree.Name == treeFallType and fallTree.Owner.Value == localPlayer.Name then
+								print(fallTree)
 								
 								local Part = fallTree.WoodSection
 
@@ -76,7 +78,7 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 								BodyGyro.D = 140
 								BodyGyro.MaxTorque = Vector3.new(200, 200, 200)
 								BodyGyro.P = 30000
-
+								print("Точка 2")
 								-- Додаємо BodyPosition для керування фізикою
 								local BodyPos = Instance.new("BodyPosition", Dragger)
 								BodyPos.MaxForce = Vector3.new(1000000, 1000000, 1000000)
@@ -113,6 +115,7 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 							end
 						end
 
+					print("Точка 3 доходе")
 					elseif treesCounter >= treeAmount and allSwitch == false then
 						isListening = false
 						return --break для всіх for
