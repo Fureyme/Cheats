@@ -8,6 +8,7 @@ local firstPlayerPos = CFrame.new(game:GetService("Players").LocalPlayer.Charact
 local isListening = true
 local treesCounter = 0
 local treeChoping = false
+local fallTree
 
 --Settings
 local allSwitch = false
@@ -31,14 +32,14 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 
 						local connection
 						connection = workspace.LogModels.ChildAdded:Connect(function(child)
-							if child.Name == "Loose_Birch" then
-								print(child)
+							if child.Name == treeFallType then
+								fallTree = child
 							end
 						end)
 
 						treeChoping = true
-						local connection
-						connection = treeChoped.OnClientEvent:Connect(function(instruction)
+						local connectionChoped
+						connectionChoped = treeChoped.OnClientEvent:Connect(function(instruction)
 							if instruction == "FellTree" then
 								treeChoping = false
 							end
@@ -61,79 +62,64 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 							wait(0.08)
 						end
 
-						if connection then connection:Disconnect() end -- Отключаем слушатель после завершения рубки
-
-						-- Підписуємося на появу нового об'єкта в LogModels
-
-						-- Чекаємо до 3 секунд, поки ChildAdded спрацює
-						local timer = 0
-						while not spawnedLog and timer < 3 do
-							print(timer)
-							task.wait(0.05)
-							timer = timer + 0.05
-						end
+						if connectionChoped then connectionChoped:Disconnect() end -- Отключаем слушатель после завершения рубки
 
 						connection:Disconnect() -- Відключаємо відстеження
 
 						-- Дерево зрублено
-						wait(1)
 						treesCounter = treesCounter + 1
 						print("точка 1")
-						for index, fallTree in pairs(workspace.LogModels:GetChildren()) do -- Пошук зрубленого дерерва
-							if fallTree.Name == treeFallType and fallTree.Owner.Value.Name == localPlayer.Name then
-								print(fallTree)
-								
-								local Part = fallTree.WoodSection
+						print(fallTree)
+						
+						local Part = fallTree.WoodSection
 
-								-- Створюємо локальний Dragger (як v_u_12 у коді гри)
-								local Dragger = Instance.new("Part")
-								Dragger.Size = Vector3.new(1, 1, 1)
-								Dragger.Transparency = 1
-								Dragger.CanCollide = false
-								Dragger.CFrame = Part.CFrame
-								Dragger.Parent = workspace
+						-- Створюємо локальний Dragger (як v_u_12 у коді гри)
+						local Dragger = Instance.new("Part")
+						Dragger.Size = Vector3.new(1, 1, 1)
+						Dragger.Transparency = 1
+						Dragger.CanCollide = false
+						Dragger.CFrame = Part.CFrame
+						Dragger.Parent = workspace
 
-								local BodyGyro = Instance.new("BodyGyro", Dragger)
-								BodyGyro.CFrame = Part.CFrame
-								BodyGyro.D = 140
-								BodyGyro.MaxTorque = Vector3.new(200, 200, 200)
-								BodyGyro.P = 30000
-								print("Точка 2")
-								-- Додаємо BodyPosition для керування фізикою
-								local BodyPos = Instance.new("BodyPosition", Dragger)
-								BodyPos.MaxForce = Vector3.new(1000000, 1000000, 1000000)
-								BodyPos.P = 10000
-								BodyPos.D = 800
-								BodyPos.Position = Part.Position
+						local BodyGyro = Instance.new("BodyGyro", Dragger)
+						BodyGyro.CFrame = Part.CFrame
+						BodyGyro.D = 140
+						BodyGyro.MaxTorque = Vector3.new(200, 200, 200)
+						BodyGyro.P = 30000
+						print("Точка 2")
+						-- Додаємо BodyPosition для керування фізикою
+						local BodyPos = Instance.new("BodyPosition", Dragger)
+						BodyPos.MaxForce = Vector3.new(1000000, 1000000, 1000000)
+						BodyPos.P = 10000
+						BodyPos.D = 800
+						BodyPos.Position = Part.Position
 
-								-- Приварюємо дерево до Dragger
-								local Weld = Instance.new("Weld", Dragger)
-								Weld.Name = "DraggerWeld"
-								Weld.Part0 = Dragger
-								Weld.Part1 = Part
-								Weld.C0 = CFrame.new()
-								Weld.C1 = Dragger.CFrame:ToObjectSpace(Part.CFrame)
+						-- Приварюємо дерево до Dragger
+						local Weld = Instance.new("Weld", Dragger)
+						Weld.Name = "DraggerWeld"
+						Weld.Part0 = Dragger
+						Weld.Part1 = Part
+						Weld.C0 = CFrame.new()
+						Weld.C1 = Dragger.CFrame:ToObjectSpace(Part.CFrame)
 
-								-- 4. Запускаем фоновий потік підтримки з'єднання з сервером
-								local Dragging = true
-								task.spawn(function()
-									local Event = game:GetService("ReplicatedStorage").Interaction.ClientIsDragging
-									while Dragging do
-										Event:FireServer(TargetLog)
-										task.wait(0.1)
-									end
-								end)
-
-								Dragger.CFrame = firstPlayerPos
-								fallTree.WoodSection.CFrame = firstPlayerPos
-								BodyPos.Position = firstPlayerPos.Position
-								BodyGyro.CFrame = firstPlayerPos
-								playerPos.CFrame = firstPlayerPos
-								wait(1)
-								Dragger:Destroy()
-								Dragging = false
+						-- 4. Запускаем фоновий потік підтримки з'єднання з сервером
+						local Dragging = true
+						task.spawn(function()
+							local Event = game:GetService("ReplicatedStorage").Interaction.ClientIsDragging
+							while Dragging do
+								Event:FireServer(TargetLog)
+								task.wait(0.1)
 							end
-						end
+						end)
+
+						Dragger.CFrame = firstPlayerPos
+						fallTree.WoodSection.CFrame = firstPlayerPos
+						BodyPos.Position = firstPlayerPos.Position
+						BodyGyro.CFrame = firstPlayerPos
+						playerPos.CFrame = firstPlayerPos
+						wait(1)
+						Dragger:Destroy()
+						Dragging = false
 
 					print("Точка 3 доходе")
 					elseif treesCounter >= treeAmount and allSwitch == false then
