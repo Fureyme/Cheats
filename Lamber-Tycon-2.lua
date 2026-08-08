@@ -18,7 +18,7 @@ local treeAmount = 1
 for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук регіонів з деревами
 	if region.Name == "TreeRegion" and region.ClassName == "Model" then
 		for indexTree, tree in pairs(workspace:GetChildren()[indexRegion]:GetChildren()) do --Пошук типа дерева
-			if tree.TreeClass and tree.TreeClass.Value == treeType then 
+			if tree:FindFirstChild("TreeClass") and tree.TreeClass.Value == treeType then
 				for indexLog, log in pairs(workspace:GetChildren()[indexRegion]:GetChildren()[indexTree]:GetChildren()) do
 					if log.Name == "WoodSection" and log.ID.Value == 1 then
 
