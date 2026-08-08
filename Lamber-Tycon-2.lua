@@ -61,7 +61,7 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 						treesCounter = treesCounter + 1
 						print("точка 1")
 						for index, fallTree in pairs(workspace.LogModels:GetChildren()) do -- Пошук зрубленого дерерва
-							if fallTree.Name == treeFallType and fallTree.Owner.Value == localPlayer.Name then
+							if fallTree.Name == treeFallType and fallTree.Owner.Value.Name == localPlayer.Name then
 								print(fallTree)
 								
 								local Part = fallTree.WoodSection
