@@ -28,8 +28,15 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 						print("workspace:GetChildren()[" .. indexRegion .. "]:GetChildren()[" .. indexTree .. "].CutEvent")
 						
 						playerPos.CFrame = log.CFrame
-						treeChoping = true
 
+						local connection
+						connection = workspace.LogModels.ChildAdded:Connect(function(child)
+							if child.Name == "Loose_Birch" then
+								print(child)
+							end
+						end)
+
+						treeChoping = true
 						local connection
 						connection = treeChoped.OnClientEvent:Connect(function(instruction)
 							if instruction == "FellTree" then
