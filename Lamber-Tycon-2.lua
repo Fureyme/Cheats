@@ -86,7 +86,7 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 						BodyGyro.D = 140
 						BodyGyro.MaxTorque = Vector3.new(200, 200, 200)
 						BodyGyro.P = 30000
-						print("Точка 2")
+		
 						-- Додаємо BodyPosition для керування фізикою
 						local BodyPos = Instance.new("BodyPosition", Dragger)
 						BodyPos.MaxForce = Vector3.new(1000000, 1000000, 1000000)
@@ -96,28 +96,28 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 
 						-- Приварюємо дерево до Dragger
 						local Weld = Instance.new("Weld", Dragger)
-						Weld.Name = "DraggerWeld"
 						Weld.Part0 = Dragger
 						Weld.Part1 = Part
 						Weld.C0 = CFrame.new()
 						Weld.C1 = Dragger.CFrame:ToObjectSpace(Part.CFrame)
 
-						-- 4. Запускаем фоновий потік підтримки з'єднання з сервером
+						-- Запускаем фоновий потік підтримки з'єднання з сервером
 						local Dragging = true
 						task.spawn(function()
 							local Event = game:GetService("ReplicatedStorage").Interaction.ClientIsDragging
 							while Dragging do
-								Event:FireServer(TargetLog)
-								task.wait(0.1)
+								Event:FireServer(fallTree)
+								task.wait(0.05)
 							end
 						end)
+						wait(1)
 
 						Dragger.CFrame = firstPlayerPos
 						fallTree.WoodSection.CFrame = firstPlayerPos
 						BodyPos.Position = firstPlayerPos.Position
 						BodyGyro.CFrame = firstPlayerPos
 						playerPos.CFrame = firstPlayerPos
-						wait(1)
+
 						Dragger:Destroy()
 						Dragging = false
 
