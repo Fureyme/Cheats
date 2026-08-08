@@ -4,7 +4,7 @@ local playerPos = localPlayer.Character.HumanoidRootPart
 local Event = game:GetService("ReplicatedStorage").Interaction.RemoteProxy
 local treeChoped = game:GetService("ReplicatedStorage"):WaitForChild("Notices"):WaitForChild("ShowUserInstructionRemote")
 
-local firstPlayerPos = playerPos.CFrame
+local firstPlayerPos = CFrame.new(4548.7085, 2.80058789, 289.605103, 0.548769534, -6.8040773e-09, 0.83597368, -5.34591438e-09, 1, 1.1648396e-08, -0.83597368, -1.08613287e-08, 0.548769534)
 local isListening = true -- Управляйте этим флагом из любой части кода
 local treesCounter = 0
 local treeChoping = false
