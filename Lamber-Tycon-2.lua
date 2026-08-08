@@ -32,7 +32,10 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 
 						local connection
 						connection = workspace.LogModels.ChildAdded:Connect(function(child)
-							if child.Name == treeFallType then
+							if child.Owner and child.Name == treeFallType and child.Owner.OwnerString.Value == game:GetService("Players").LocalPlayer.Name then
+								fallTree = child
+								treeChoping = false
+							elseif child.Name == treeFallType then
 								fallTree = child
 								treeChoping = false
 							end
