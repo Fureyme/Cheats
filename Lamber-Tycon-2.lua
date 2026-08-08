@@ -4,7 +4,7 @@ local playerPos = localPlayer.Character.HumanoidRootPart
 local Event = game:GetService("ReplicatedStorage").Interaction.RemoteProxy
 local treeChoped = game:GetService("ReplicatedStorage"):WaitForChild("Notices"):WaitForChild("ShowUserInstructionRemote")
 
-local firstPlayerPos = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame
+local firstPlayerPos = CFrame.new(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
 local isListening = true -- Управляйте этим флагом из любой части кода
 local treesCounter = 0
 local treeChoping = false
@@ -56,6 +56,24 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 
 						if connection then connection:Disconnect() end -- Отключаем слушатель после завершения рубки
 
+						-- Підписуємося на появу нового об'єкта в LogModels
+						local connection
+						connection = workspace.LogModels.ChildAdded:Connect(function(child)
+							if child.Name == "Loose_Birch" then
+								print(child)
+							end
+						end)
+
+						-- Чекаємо до 3 секунд, поки ChildAdded спрацює
+						local timer = 0
+						while not spawnedLog and timer < 3 do
+							print(timer)
+							task.wait(0.1)
+							timer = timer + 0.1
+						end
+
+						connection:Disconnect() -- Відключаємо відстеження
+
 						-- Дерево зрублено
 						wait(1)
 						treesCounter = treesCounter + 1
@@ -106,7 +124,7 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 								end)
 
 								Dragger.CFrame = firstPlayerPos
-								workspace.LogModels.Loose_Birch.WoodSection.CFrame = firstPlayerPos
+								fallTree.WoodSection.CFrame = firstPlayerPos
 								BodyPos.Position = firstPlayerPos.Position
 								BodyGyro.CFrame = firstPlayerPos
 								playerPos.CFrame = firstPlayerPos
