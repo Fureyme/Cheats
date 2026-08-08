@@ -4,7 +4,7 @@ local playerPos = localPlayer.Character.HumanoidRootPart
 local Event = game:GetService("ReplicatedStorage").Interaction.RemoteProxy
 local treeChoped = game:GetService("ReplicatedStorage"):WaitForChild("Notices"):WaitForChild("ShowUserInstructionRemote")
 
-local firstPlayerPos = playerPos.CFrame
+local firstPlayerPos = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame
 local isListening = true -- Управляйте этим флагом из любой части кода
 local treesCounter = 0
 local treeChoping = false
@@ -13,7 +13,7 @@ local treeChoping = false
 local allSwitch = false
 local treeType = "Birch"
 local treeFallType = "Loose_Birch"
-local treeAmount = 1
+local treeAmount = 2
 
 for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук регіонів з деревами
 	if region.Name == "TreeRegion" and region.ClassName == "Model" then
