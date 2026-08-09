@@ -48,8 +48,7 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 								{
 									height = 0.30, --высота рубки(0.30 мин значения)
 									faceVector = Vector3.new(-1, 0, 0),
-									--localPlayer.Character.Tool
-									tool = game:GetService("Players").localPlayer.Character.Tool,
+									tool = game:GetService("Players").LocalPlayer.Backpack.Tool,
 									sectionId = 1, --низ дерерва
 									hitPoints = 0.2,
 									cooldown = 0.65,
