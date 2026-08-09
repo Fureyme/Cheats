@@ -23,11 +23,7 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 				for indexLog, log in pairs(workspace:GetChildren()[indexRegion]:GetChildren()[indexTree]:GetChildren()) do
 					if log.Name == "WoodSection" and log.ID.Value == 1 then
 
-						print(indexLog)
-						print(log.Size.Y)
-						print(log.CFrame)
-						print("workspace:GetChildren()[" .. indexRegion .. "]:GetChildren()[" .. indexTree .. "].CutEvent")
-						
+						--print(log.Size.Y)
 						playerPos.CFrame = log.CFrame
 
 						local connection
@@ -50,7 +46,7 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 							Event:FireServer(
 								workspace:GetChildren()[indexRegion]:GetChildren()[indexTree].CutEvent,
 								{
-									height = 1, --высота рубки
+									height = 0.30, --высота рубки(0.30 мин значения)
 									faceVector = Vector3.new(-1, 0, 0),
 									--localPlayer.Character.Tool
 									tool = game:GetService("Players").LocalPlayer.Backpack.Tool,
@@ -68,8 +64,6 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 
 						-- Дерево зрублено
 						treesCounter = treesCounter + 1
-						print("точка 1")
-						print(fallTree)
 						
 						local Part = fallTree.WoodSection
 
@@ -121,7 +115,6 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 						Dragger:Destroy()
 						Dragging = false
 
-					print("Точка 3 доходе")
 					elseif treesCounter >= treeAmount and allSwitch == false then
 						isListening = false
 						return --break для всіх for
