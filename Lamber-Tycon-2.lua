@@ -40,7 +40,8 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 
 						local connection
 						connection = workspace.LogModels.ChildAdded:Connect(function(child)
-							wait(0.1)
+							wait(0.5)
+							print(child.Parent)
 							if child.Name == treeFallType and child:WaitForChild("Owner"):WaitForChild("OwnerString").Value == localPlayer.Name then
 								fallTree = child
 								treeChoping = false
