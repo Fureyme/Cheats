@@ -25,7 +25,7 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 					if WoodSection.Name == "WoodSection" then
 						logCount = logCount + 1
 					elseif WoodSection.ID.Value == 1 then
-						local log = WoodSection
+						log = WoodSection
 					end
 
 					if logCount <= 0 then
@@ -119,6 +119,7 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 
 						Dragger:Destroy()
 						Dragging = false
+					end
 
 					if treesCounter >= treeAmount and allSwitch == false then
 						isListening = false
