@@ -120,7 +120,7 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 						Dragger:Destroy()
 						Dragging = false
 
-					elseif treesCounter >= treeAmount and allSwitch == false then
+					if treesCounter >= treeAmount and allSwitch == false then
 						isListening = false
 						return --break для всіх for
 					end
