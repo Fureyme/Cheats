@@ -34,9 +34,8 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 						treeChoping = true
 						local connectionChoped
 						connectionChoped = treeChoped.OnClientEvent:Connect(function(instruction)
-							if instruction == "FellTree" then
-								treeChoping = false
-							end
+							treeChoping = false
+
 						end)
 
 						while treeChoping do 
@@ -101,6 +100,7 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 								task.wait(0.05)
 							end
 						end)
+						wait(0.1)
 
 						Dragger.CFrame = firstPlayerPos
 						fallTree.WoodSection.CFrame = firstPlayerPos
