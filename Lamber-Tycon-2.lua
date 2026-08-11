@@ -40,17 +40,18 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 
 						local connection
 						connection = workspace.LogModels.ChildAdded:Connect(function(child)
-							if child.Name == treeFallType then
+							if child.Name == treeFallType and child:FindFirstChild("Owner").OwnerString.Value == localPlayer.Name then
 								fallTree = child
+								treeChoping = false
 							end
 						end)
 
-						treeChoping = true
-						local connectionChoped
-						connectionChoped = treeChoped.OnClientEvent:Connect(function(instruction)
-							treeChoping = false
+						--treeChoping = true
+						--local connectionChoped
+						--connectionChoped = treeChoped.OnClientEvent:Connect(function(instruction)
+							
 
-						end)
+						--end)
 
 						while treeChoping do 
 							--Ивент для рубки дерерва
@@ -68,7 +69,7 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 							wait(0.05)
 						end
 
-						if connectionChoped then connectionChoped:Disconnect() end -- Отключаем слушатель после завершения рубки
+						--if connectionChoped then connectionChoped:Disconnect() end -- Отключаем слушатель после завершения рубки
 
 						connection:Disconnect() -- Відключаємо відстеження
 
@@ -88,7 +89,7 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 						local BodyGyro = Instance.new("BodyGyro", Dragger)
 						BodyGyro.CFrame = Part.CFrame
 						BodyGyro.D = 140
-						BodyGyro.MaxTorque = Vector3.new(200, 200, 200)
+						BodyGyro.MaxTorque = Vector3.new(5000, 5000, 5000)
 						BodyGyro.P = 30000
 		
 						-- Додаємо BodyPosition для керування фізикою
