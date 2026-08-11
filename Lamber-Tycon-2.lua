@@ -10,6 +10,7 @@ local treesCounter = 0
 local treeChoping = false                                    ---добав щоб скрипт вибирав найкращий топорик
 local fallTree
 local logCount = -3
+local log
 
 --Settings
 local allSwitch = false
@@ -25,15 +26,16 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 					if WoodSection.Name == "WoodSection" then
 						logCount = logCount + 1
 					end
-					if WoodSection:FindFirstChild("ID") and WoodSection.ID.Value == 1 then
-						log = WoodSection
-					else
-						continue
-					end
+				end
 
-					if logCount <= 0 then
-						--nop
-					else
+				if logCount <= 0 then
+					logCount = -3
+					continue
+				end
+
+				for indexLog, log in pairs(workspace:GetChildren()[indexRegion]:GetChildren()[indexTree]:GetChildren()) do
+					if log.Name == "WoodSection" and log.ID.Value == 1 then
+						logCount = -3
 						playerPos.CFrame = log.CFrame --добав переміщеня від дерерва на 2-3 студа
 
 						local connection
