@@ -7,7 +7,7 @@ local treeChoped = game:GetService("ReplicatedStorage"):WaitForChild("Notices"):
 local firstPlayerPos = CFrame.new(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame.Position)
 local isListening = true
 local treesCounter = 0
-local treeChoping = false
+local treeChoping = false                                    ---добав щоб скрипт вибирав найкращий топорик
 local fallTree
 
 --Settings
@@ -22,9 +22,7 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 			if tree:FindFirstChild("TreeClass") and tree.TreeClass.Value == treeType then
 				for indexLog, log in pairs(workspace:GetChildren()[indexRegion]:GetChildren()[indexTree]:GetChildren()) do
 					if log.Name == "WoodSection" and log.ID.Value == 1 then
-
-						--print(log.Size.Y)
-						playerPos.CFrame = log.CFrame
+						playerPos.CFrame = log.CFrame --добав переміщеня від дерерва на 2-3 студа
 
 						local connection
 						connection = workspace.LogModels.ChildAdded:Connect(function(child)
@@ -50,11 +48,11 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 									faceVector = Vector3.new(-1, 0, 0),
 									tool = game:GetService("Players").LocalPlayer.Backpack.Tool,
 									sectionId = 1, --низ дерерва
-									hitPoints = 0.2,
-									cooldown = 0.65,
+									hitPoints = 1.45, --Hardened Axe
+									cooldown = 0.1,
 									cuttingClass = "Axe"
 								})
-							wait(0.08)
+							wait(0.05)
 						end
 
 						if connectionChoped then connectionChoped:Disconnect() end -- Отключаем слушатель после завершения рубки
@@ -103,7 +101,7 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 								task.wait(0.05)
 							end
 						end)
-						wait(1)
+						wait(0.5) --попробуй зменшити до 0.5
 
 						Dragger.CFrame = firstPlayerPos
 						fallTree.WoodSection.CFrame = firstPlayerPos
