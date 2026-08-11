@@ -40,7 +40,7 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 
 						local connection
 						connection = workspace.LogModels.ChildAdded:Connect(function(child)
-							if child.Name == treeFallType and child:FindFirstChild("Owner").OwnerString.Value == localPlayer.Name then
+							if child.Name == treeFallType and child:FindFirstChild("Owner"):WaitForChild("OwnerString").Value == localPlayer.Name then
 								fallTree = child
 								treeChoping = false
 							end
@@ -51,7 +51,7 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 						--connectionChoped = treeChoped.OnClientEvent:Connect(function(instruction)
 						
 						--end)
-						
+
 						treeChoping = true
 						while treeChoping do 
 							--Ивент для рубки дерерва
