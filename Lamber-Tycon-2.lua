@@ -24,7 +24,7 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 				for indexLog, WoodSection in pairs(workspace:GetChildren()[indexRegion]:GetChildren()[indexTree]:GetChildren()) do
 					if WoodSection.Name == "WoodSection" then
 						logCount = logCount + 1
-					elseif WoodSection:FindFirstChild("ID") and WoodSection.ID.Value == 1 then
+					if WoodSection:FindFirstChild("ID") and WoodSection.ID.Value == 1 then
 						log = WoodSection
 					else
 						continue
