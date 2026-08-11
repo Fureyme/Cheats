@@ -101,7 +101,6 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 								task.wait(0.05)
 							end
 						end)
-						wait(0.5) --попробуй зменшити до 0.5
 
 						Dragger.CFrame = firstPlayerPos
 						fallTree.WoodSection.CFrame = firstPlayerPos
