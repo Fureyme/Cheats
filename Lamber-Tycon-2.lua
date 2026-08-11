@@ -22,10 +22,10 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 		for indexTree, tree in pairs(workspace:GetChildren()[indexRegion]:GetChildren()) do --Пошук типа дерева
 			if tree:FindFirstChild("TreeClass") and tree.TreeClass.Value == treeType then
 				for indexLog, WoodSection in pairs(workspace:GetChildren()[indexRegion]:GetChildren()[indexTree]:GetChildren()) do
-					if WoodSection.ID.Value == 1 then
-						log = WoodSection
-					elseif WoodSection.Name == "WoodSection" then
+					if WoodSection.Name == "WoodSection" then
 						logCount = logCount + 1
+					elseif WoodSection.ID and WoodSection.ID.Value == 1 then
+						log = WoodSection
 					end
 
 					if logCount <= 0 then
