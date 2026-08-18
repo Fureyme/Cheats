@@ -41,17 +41,10 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 						print("start")
 
 						local connection
-						connection = workspace.LogModels.ChildAdded:Connect(function(fall_Tree)
-							wait(10)
-							if fall_Tree.Name == treeFallType then --fall_Tree:WaitForChild("Owner"):WaitForChild("OwnerString") :: StringValue.Value == localPlayer.Name
-								for _, child in ipairs(fall_Tree:GetChildren()) do
-									print(child.Name, child.ClassName)
-								end
-								for _, child in ipairs(fall_Tree.Owner:GetChildren()) do
-									print(child.Name, child.ClassName)
-								end
-								print(fall_Tree:WaitForChild("Owner"):WaitForChild("OwnerString").Value)
-								fallTree = fall_Tree
+						connection = workspace.LogModels.ChildAdded:Connect(function(child)
+							if child.Name == treeFallType and child:WaitForChild("Owner"):WaitForChild("OwnerString").Value == localPlayer.Name then
+								print(child:WaitForChild("Owner"):WaitForChild("OwnerString").Value)
+								fallTree = child
 								treeChoping = false
 							end
 						end)
