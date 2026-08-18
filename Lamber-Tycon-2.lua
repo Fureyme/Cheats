@@ -39,10 +39,10 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 						playerPos.CFrame = log.CFrame --добав переміщеня від дерерва на 2-3 студа
 
 						local connection
-						connection = workspace.LogModels.ChildAdded:Connect(function(child)
+						connection = workspace.LogModels.ChildAdded:Connect(function(fall_Tree)
 							wait(0.5)
-							if child.Name == treeFallType then --child:WaitForChild("Owner"):WaitForChild("OwnerString") :: StringValue.Value == localPlayer.Name
-								for _, child in ipairs(object:GetChildren()) do
+							if fall_Tree.Name == treeFallType then --fall_Tree:WaitForChild("Owner"):WaitForChild("OwnerString") :: StringValue.Value == localPlayer.Name
+								for _, child in ipairs(fall_Tree:GetChildren()) do
 									print(child.Name, child.ClassName)
 								end
 								fallTree = child
