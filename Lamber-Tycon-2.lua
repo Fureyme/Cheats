@@ -50,7 +50,8 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 								for _, child in ipairs(fall_Tree.Owner:GetChildren()) do
 									print(child.Name, child.ClassName)
 								end
-								fallTree = child
+								print(fall_Tree:WaitForChild("Owner"):WaitForChild("OwnerString") :: StringValue.Value)
+								fallTree = fall_Tree
 								treeChoping = false
 							end
 						end)
