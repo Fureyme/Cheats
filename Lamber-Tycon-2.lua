@@ -50,7 +50,7 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 								for _, child in ipairs(fall_Tree.Owner:GetChildren()) do
 									print(child.Name, child.ClassName)
 								end
-								print(fall_Tree:WaitForChild("Owner"):WaitForChild("OwnerString") :: StringValue.Value)
+								print(fall_Tree:WaitForChild("Owner"):WaitForChild("OwnerString").Value)
 								fallTree = fall_Tree
 								treeChoping = false
 							end
@@ -68,7 +68,7 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 							Event:FireServer(
 								workspace:GetChildren()[indexRegion]:GetChildren()[indexTree].CutEvent,
 								{
-									height = 0.30, --высота рубки(0.30 мин значения)
+									height = 0.30, --высота рубки(0.30 мин. значения)
 									faceVector = Vector3.new(-1, 0, 0),
 									tool = game:GetService("Players").LocalPlayer.Backpack.Tool,
 									sectionId = 1, --низ дерерва
