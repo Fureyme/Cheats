@@ -49,7 +49,7 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 						end)
 
 						--начался ивент рубки
-						
+
 						treeChoping = true
 						while treeChoping do 
 							--Ивент для рубки дерерва
@@ -64,7 +64,7 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 									cooldown = 0.1,
 									cuttingClass = "Axe"
 								})
-							wait(0.05)
+							wait(0.1)
 						end
 
 						connection:Disconnect() -- Відключаємо відстеження
@@ -108,7 +108,7 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 							local Event = game:GetService("ReplicatedStorage").Interaction.ClientIsDragging
 							while Dragging do
 								Event:FireServer(fallTree)
-								task.wait(0.05)
+								task.wait(0.01)
 							end
 						end)
 						wait(0.1)
