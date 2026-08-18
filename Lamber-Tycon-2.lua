@@ -111,7 +111,7 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 								task.wait(0.01)
 							end
 						end)
-						wait(0.1)
+						wait(0.3)
 
 						Dragger.CFrame = firstPlayerPos
 						fallTree.WoodSection.CFrame = firstPlayerPos
