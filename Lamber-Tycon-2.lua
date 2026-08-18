@@ -15,7 +15,6 @@ local log
 --Settings
 local allSwitch = false
 local treeType = "Birch"
-local treeFallType = "Loose_Birch"
 local treeAmount = 3
 
 for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук регіонів з деревами
@@ -42,19 +41,15 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 
 						local connection
 						connection = workspace.LogModels.ChildAdded:Connect(function(child)
-							if child.Name == treeFallType and child:WaitForChild("Owner"):WaitForChild("OwnerString").Value == localPlayer.Name then
+							if child.TreeClass.Value == treeType and child:WaitForChild("Owner"):WaitForChild("OwnerString").Value == localPlayer.Name then
 								print(child:WaitForChild("Owner"):WaitForChild("OwnerString").Value)
 								fallTree = child
 								treeChoping = false
 							end
 						end)
 
+						--начался ивент рубки
 						
-						--local connectionChoped
-						--connectionChoped = treeChoped.OnClientEvent:Connect(function(instruction)
-						
-						--end)
-
 						treeChoping = true
 						while treeChoping do 
 							--Ивент для рубки дерерва
@@ -71,8 +66,6 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 								})
 							wait(0.05)
 						end
-
-						--if connectionChoped then connectionChoped:Disconnect() end -- Отключаем слушатель после завершения рубки
 
 						connection:Disconnect() -- Відключаємо відстеження
 
