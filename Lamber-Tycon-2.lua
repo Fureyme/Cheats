@@ -40,7 +40,7 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 
 						local connection
 						connection = workspace.LogModels.ChildAdded:Connect(function(fall_Tree)
-							wait(0.5)
+							wait(3)
 							if fall_Tree.Name == treeFallType then --fall_Tree:WaitForChild("Owner"):WaitForChild("OwnerString") :: StringValue.Value == localPlayer.Name
 								for _, child in ipairs(fall_Tree:GetChildren()) do
 									print(child.Name, child.ClassName)
