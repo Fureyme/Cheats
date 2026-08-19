@@ -144,17 +144,17 @@ if characterTool then
 			for toolName, indexTool in pairs(inventory) do --получаем index топора в Backpack
 				if nameAxes == nil then
 					hitPoints = getHitPoint(toolName, treeType)
-					tool = localPlayer.Backpack[indexTool]
+					tool = localPlayer.Backpack:GetChildren()[indexTool]
 					break
 				end
 				for _, nameAxe in pairs(nameAxes) do
 					if nameAxe == toolName then
 						hitPoints = getHitPoint(nameAxe, treeType)
 						print(type(indexTool), indexTool)
-						tool = localPlayer.Backpack[indexTool]
+						tool = localPlayer.Backpack:GetChildren()[indexTool]
 					else 
 						hitPoints = getHitPoint(toolName, treeType)
-						tool = localPlayer.Backpack[indexTool]
+						tool = localPlayer.Backpack:GetChildren()[indexTool]
 						break
 					end
 				end
