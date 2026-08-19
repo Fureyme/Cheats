@@ -2,7 +2,6 @@
 local localPlayer = game:GetService("Players").LocalPlayer
 local playerPos = localPlayer.Character.HumanoidRootPart
 local Event = game:GetService("ReplicatedStorage").Interaction.RemoteProxy
-local treeChoped = game:GetService("ReplicatedStorage"):WaitForChild("Notices"):WaitForChild("ShowUserInstructionRemote")
 
 local firstPlayerPos = CFrame.new(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame.Position)
 local isListening = true
@@ -16,6 +15,10 @@ local log
 local allSwitch = false
 local treeType = "Birch"
 local treeAmount = 3
+
+--for index, tool in pairs(game:GetService("Players").LocalPlayer.Backpack) do
+
+--end
 
 for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук регіонів з деревами
 	if region.Name == "TreeRegion" and region.ClassName == "Model" then
@@ -35,14 +38,11 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 				for indexLog, log in pairs(workspace:GetChildren()[indexRegion]:GetChildren()[indexTree]:GetChildren()) do
 					if log.Name == "WoodSection" and log.ID.Value == 1 then
 						logCount = -3
-						playerPos.CFrame = log.CFrame --добав переміщеня від дерерва на 2-3 студа
-
-						print("start")
+						playerPos.CFrame = log.CFrame * CFrame.new(0, 0, 3) --переміщеня від дерерва на 3 студа
 
 						local connection
 						connection = workspace.LogModels.ChildAdded:Connect(function(child)
 							if child:WaitForChild("TreeClass").Value == treeType and child:WaitForChild("Owner"):WaitForChild("OwnerString").Value == localPlayer.Name then
-								print(child:WaitForChild("Owner"):WaitForChild("OwnerString").Value)
 								fallTree = child
 								treeChoping = false
 							end
@@ -82,6 +82,7 @@ for indexRegion, region in pairs(workspace:GetChildren()) do --Пошук рег
 						Dragger.CFrame = Part.CFrame
 						Dragger.Parent = workspace
 
+						--для сили поворота
 						local BodyGyro = Instance.new("BodyGyro", Dragger)
 						BodyGyro.CFrame = Part.CFrame
 						BodyGyro.D = 140
