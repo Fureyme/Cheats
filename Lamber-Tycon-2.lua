@@ -100,11 +100,11 @@ local function getHitPoint(toolName, treeName)
 	end
 end
 
-local inventory = {}
-
 if #localPlayer.Backpack:GetChildren() == 0 and not localPlayer.Character:FindFirstChild("Tool") then
-    error("Backpack is empty")
+	error("Backpack is empty")
 end
+
+local inventory = {}
 
 for index, BackpackTool in pairs(localPlayer.Backpack:GetChildren()) do
 	inventory[BackpackTool.ToolName.Value] = index
@@ -150,6 +150,7 @@ if characterTool then
 				for _, nameAxe in pairs(nameAxes) do
 					if nameAxe == toolName then
 						hitPoints = getHitPoint(nameAxe, treeType)
+						print(type(indexTool), indexTool)
 						tool = localPlayer.Backpack.Tool[indexTool]
 					end
 				end
