@@ -95,6 +95,8 @@ local function getHitPoint(toolName, treeName)
 				if treeName == "Cherry" then
 					return hitPoint[2]
 				end
+			else 
+				hitPoint[1]
 			end
 		end
 	end
